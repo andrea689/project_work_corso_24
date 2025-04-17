@@ -6,6 +6,8 @@ part 'playlists_state.freezed.dart';
 @freezed
 abstract class PlaylistsState with _$PlaylistsState {
   const factory PlaylistsState({
+    @Default(false) bool isLoading,
+    @Default(false) bool isError,
     @Default([]) List<Playlist> playlists,
   }) = _PlaylistsState;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wp_lesson_1/api/dio_client.dart';
 import 'package:wp_lesson_1/pages/library/cubits/playlists_cubit.dart';
 import 'package:wp_lesson_1/pages/library/widgets/music_section.dart';
 import 'package:wp_lesson_1/pages/library/widgets/podcast_section.dart';
@@ -10,7 +11,9 @@ class LibraryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PlaylistsCubit()..fetchPlaylists(),
+      create: (context) => PlaylistsCubit(
+        client: context.read<DioClient>(),
+      )..fetchPlaylists(),
       child: const LibraryPageScaffold(),
     );
   }

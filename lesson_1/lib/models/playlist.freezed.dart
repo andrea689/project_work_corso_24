@@ -15,11 +15,13 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Playlist {
+  @JsonKey(name: 'objectId')
+  String? get id;
   @JsonKey(name: 'nome_playlist')
   String get name;
   @JsonKey(name: 'nome_utente')
   String get user;
-  @JsonKey(name: 'copertura')
+  @JsonKey(name: 'copertina')
   String get imageUrl;
 
   /// Create a copy of Playlist
@@ -37,6 +39,7 @@ mixin _$Playlist {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Playlist &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -45,11 +48,11 @@ mixin _$Playlist {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, user, imageUrl);
+  int get hashCode => Object.hash(runtimeType, id, name, user, imageUrl);
 
   @override
   String toString() {
-    return 'Playlist(name: $name, user: $user, imageUrl: $imageUrl)';
+    return 'Playlist(id: $id, name: $name, user: $user, imageUrl: $imageUrl)';
   }
 }
 
@@ -59,9 +62,10 @@ abstract mixin class $PlaylistCopyWith<$Res> {
       _$PlaylistCopyWithImpl;
   @useResult
   $Res call(
-      {@JsonKey(name: 'nome_playlist') String name,
+      {@JsonKey(name: 'objectId') String? id,
+      @JsonKey(name: 'nome_playlist') String name,
       @JsonKey(name: 'nome_utente') String user,
-      @JsonKey(name: 'copertura') String imageUrl});
+      @JsonKey(name: 'copertina') String imageUrl});
 }
 
 /// @nodoc
@@ -76,11 +80,16 @@ class _$PlaylistCopyWithImpl<$Res> implements $PlaylistCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? user = null,
     Object? imageUrl = null,
   }) {
     return _then(_self.copyWith(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -101,12 +110,16 @@ class _$PlaylistCopyWithImpl<$Res> implements $PlaylistCopyWith<$Res> {
 @JsonSerializable()
 class _Playlist implements Playlist {
   const _Playlist(
-      {@JsonKey(name: 'nome_playlist') required this.name,
+      {@JsonKey(name: 'objectId') this.id,
+      @JsonKey(name: 'nome_playlist') required this.name,
       @JsonKey(name: 'nome_utente') required this.user,
-      @JsonKey(name: 'copertura') required this.imageUrl});
+      @JsonKey(name: 'copertina') required this.imageUrl});
   factory _Playlist.fromJson(Map<String, dynamic> json) =>
       _$PlaylistFromJson(json);
 
+  @override
+  @JsonKey(name: 'objectId')
+  final String? id;
   @override
   @JsonKey(name: 'nome_playlist')
   final String name;
@@ -114,7 +127,7 @@ class _Playlist implements Playlist {
   @JsonKey(name: 'nome_utente')
   final String user;
   @override
-  @JsonKey(name: 'copertura')
+  @JsonKey(name: 'copertina')
   final String imageUrl;
 
   /// Create a copy of Playlist
@@ -137,6 +150,7 @@ class _Playlist implements Playlist {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Playlist &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -145,11 +159,11 @@ class _Playlist implements Playlist {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, user, imageUrl);
+  int get hashCode => Object.hash(runtimeType, id, name, user, imageUrl);
 
   @override
   String toString() {
-    return 'Playlist(name: $name, user: $user, imageUrl: $imageUrl)';
+    return 'Playlist(id: $id, name: $name, user: $user, imageUrl: $imageUrl)';
   }
 }
 
@@ -161,9 +175,10 @@ abstract mixin class _$PlaylistCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'nome_playlist') String name,
+      {@JsonKey(name: 'objectId') String? id,
+      @JsonKey(name: 'nome_playlist') String name,
       @JsonKey(name: 'nome_utente') String user,
-      @JsonKey(name: 'copertura') String imageUrl});
+      @JsonKey(name: 'copertina') String imageUrl});
 }
 
 /// @nodoc
@@ -178,11 +193,16 @@ class __$PlaylistCopyWithImpl<$Res> implements _$PlaylistCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? user = null,
     Object? imageUrl = null,
   }) {
     return _then(_Playlist(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable

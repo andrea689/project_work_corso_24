@@ -15,6 +15,8 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$PlaylistsState {
+  bool get isLoading;
+  bool get isError;
   List<Playlist> get playlists;
 
   /// Create a copy of PlaylistsState
@@ -30,16 +32,19 @@ mixin _$PlaylistsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is PlaylistsState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isError, isError) || other.isError == isError) &&
             const DeepCollectionEquality().equals(other.playlists, playlists));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(playlists));
+  int get hashCode => Object.hash(runtimeType, isLoading, isError,
+      const DeepCollectionEquality().hash(playlists));
 
   @override
   String toString() {
-    return 'PlaylistsState(playlists: $playlists)';
+    return 'PlaylistsState(isLoading: $isLoading, isError: $isError, playlists: $playlists)';
   }
 }
 
@@ -49,7 +54,7 @@ abstract mixin class $PlaylistsStateCopyWith<$Res> {
           PlaylistsState value, $Res Function(PlaylistsState) _then) =
       _$PlaylistsStateCopyWithImpl;
   @useResult
-  $Res call({List<Playlist> playlists});
+  $Res call({bool isLoading, bool isError, List<Playlist> playlists});
 }
 
 /// @nodoc
@@ -65,9 +70,19 @@ class _$PlaylistsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
+    Object? isError = null,
     Object? playlists = null,
   }) {
     return _then(_self.copyWith(
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isError: null == isError
+          ? _self.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
       playlists: null == playlists
           ? _self.playlists
           : playlists // ignore: cast_nullable_to_non_nullable
@@ -79,9 +94,18 @@ class _$PlaylistsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _PlaylistsState implements PlaylistsState {
-  const _PlaylistsState({final List<Playlist> playlists = const []})
+  const _PlaylistsState(
+      {this.isLoading = false,
+      this.isError = false,
+      final List<Playlist> playlists = const []})
       : _playlists = playlists;
 
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isError;
   final List<Playlist> _playlists;
   @override
   @JsonKey()
@@ -104,17 +128,20 @@ class _PlaylistsState implements PlaylistsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _PlaylistsState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isError, isError) || other.isError == isError) &&
             const DeepCollectionEquality()
                 .equals(other._playlists, _playlists));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_playlists));
+  int get hashCode => Object.hash(runtimeType, isLoading, isError,
+      const DeepCollectionEquality().hash(_playlists));
 
   @override
   String toString() {
-    return 'PlaylistsState(playlists: $playlists)';
+    return 'PlaylistsState(isLoading: $isLoading, isError: $isError, playlists: $playlists)';
   }
 }
 
@@ -126,7 +153,7 @@ abstract mixin class _$PlaylistsStateCopyWith<$Res>
       __$PlaylistsStateCopyWithImpl;
   @override
   @useResult
-  $Res call({List<Playlist> playlists});
+  $Res call({bool isLoading, bool isError, List<Playlist> playlists});
 }
 
 /// @nodoc
@@ -142,9 +169,19 @@ class __$PlaylistsStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? isLoading = null,
+    Object? isError = null,
     Object? playlists = null,
   }) {
     return _then(_PlaylistsState(
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isError: null == isError
+          ? _self.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
       playlists: null == playlists
           ? _self._playlists
           : playlists // ignore: cast_nullable_to_non_nullable

@@ -6,9 +6,10 @@ part 'playlist.g.dart';
 @freezed
 abstract class Playlist with _$Playlist {
   const factory Playlist({
+    @JsonKey(name: 'objectId') String? id,
     @JsonKey(name: 'nome_playlist') required String name,
     @JsonKey(name: 'nome_utente') required String user,
-    @JsonKey(name: 'copertura') required String imageUrl,
+    @JsonKey(name: 'copertina') required String imageUrl,
   }) = _Playlist;
 
   factory Playlist.fromJson(Map<String, dynamic> json) =>

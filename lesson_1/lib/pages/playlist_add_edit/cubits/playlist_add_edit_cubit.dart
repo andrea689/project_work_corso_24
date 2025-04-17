@@ -1,26 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wp_lesson_1/api/dio_client.dart';
 import 'package:wp_lesson_1/models/playlist.dart';
-import 'package:wp_lesson_1/pages/library/cubits/playlists_state.dart';
+import 'package:wp_lesson_1/pages/playlist_add_edit/cubits/playlist_add_edit_state.dart';
 
-class PlaylistsCubit extends Cubit<PlaylistsState> {
+class PlaylistAddEditCubit extends Cubit<PlaylistAddEditState> {
   final DioClient client;
 
-  PlaylistsCubit({
+  PlaylistAddEditCubit({
     required this.client,
-  }) : super(PlaylistsState());
+  }) : super(PlaylistAddEditState());
 
-  Future<void> fetchPlaylists() async {
+  Future<void> addPlaylist(Playlist playlist) async {
     emit(state.copyWith(
       isLoading: true,
       isError: false,
     ));
     try {
-      final response = await client.api.getPlaylists();
+      await client.api.addPlaylist(playlist);
 
       emit(state.copyWith(
-        playlists: response.results,
         isLoading: false,
+        isSuccess: true,
       ));
     } catch (e) {
       print(e);
@@ -31,25 +31,28 @@ class PlaylistsCubit extends Cubit<PlaylistsState> {
     }
   }
 
-  Future<void> deletePlaylist(Playlist playlist) async {
+  Future<void> updatePlaylist(Playlist playlist) async {
     final playlistId = playlist.id;
 
     if (playlistId == null) {
       throw Exception('Playlist id is null');
     }
 
+    emit(state.copyWith(
+      isLoading: true,
+      isError: false,
+    ));
     try {
-      await client.api.deletePlaylist(playlistId);
-
-      final playlists =
-          state.playlists.where((e) => e.id != playlistId).toList();
+      await client.api.updatePlaylist(playlistId, playlist);
 
       emit(state.copyWith(
-        playlists: playlists,
+        isLoading: false,
+        isSuccess: true,
       ));
     } catch (e) {
       print(e);
       emit(state.copyWith(
+        isLoading: false,
         isError: true,
       ));
     }

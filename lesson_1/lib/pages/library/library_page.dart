@@ -27,29 +27,31 @@ class LibraryPageScaffold extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: TabBar(
-          dividerHeight: 0,
-          isScrollable: true,
-          padding: EdgeInsets.zero,
-          tabAlignment: TabAlignment.start,
-          indicatorColor: Colors.transparent,
-          labelStyle: Theme.of(context).textTheme.titleLarge,
-          unselectedLabelStyle: Theme.of(context)
-              .textTheme
-              .titleLarge
-              ?.copyWith(color: Colors.grey),
-          tabs: [
-            Tab(
-              child: Text(
-                'Musica',
+        appBar: AppBar(
+          title: TabBar(
+            dividerHeight: 0,
+            isScrollable: true,
+            padding: EdgeInsets.zero,
+            tabAlignment: TabAlignment.start,
+            indicatorColor: Colors.transparent,
+            labelStyle: Theme.of(context).textTheme.titleLarge,
+            unselectedLabelStyle: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: Colors.grey),
+            tabs: [
+              Tab(
+                child: Text(
+                  'Musica',
+                ),
               ),
-            ),
-            Tab(
-              child: Text(
-                'Podcast',
+              Tab(
+                child: Text(
+                  'Podcast',
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         body: TabBarView(
           children: [

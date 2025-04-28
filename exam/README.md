@@ -1,7 +1,7 @@
 # 📝 Esame Flutter Project Work – App Libreria Personale
 
 **📅 Data:** 28 Aprile 2025  
-**⏰ Durata:** 4 ore
+**⏰ Durata:** 4 ore  
 **👨‍🏫 Docente:** Andrea Valenzano
 
 ---
